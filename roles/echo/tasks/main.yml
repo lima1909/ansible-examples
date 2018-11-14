@@ -1,0 +1,11 @@
+---
+
+- name: "Hello Ansible"
+  command: echo "Hello Ansible"
+  register: result
+
+- debug: 
+    msg:
+      - "Echo-Result: {{ result.stdout }}"
+      - "In Shell: '{{ lookup('env', 'SHELL') }}"
+ 

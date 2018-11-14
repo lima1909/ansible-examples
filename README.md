@@ -5,3 +5,6 @@ examples for ansible
 `ansible -m ping all`
 
 `ansible -m shell -a 'echo Hello Ansible' all`
+
+# run playbook
+`ansible-playbook playbook.yml`
