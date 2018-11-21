@@ -1,0 +1,13 @@
+---
+
+- name: create directory
+  file: 
+    path: "dummy"
+    state: directory
+    mode: 0775
+
+- name: Install vi and vim 
+  apt: name={{ packages }} state=present # present is default
+  vars:
+    packages:
+      - vim

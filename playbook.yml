@@ -1,8 +1,9 @@
 ---
 
-- hosts: localhost
+- hosts: kafka
   gather_facts: no
+  become: true # run with sudo
+  
   
   roles:
-  - echo
-
+  - kafka
