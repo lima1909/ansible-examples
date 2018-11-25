@@ -8,3 +8,4 @@
 
 - include: java.yml
 - include: kafka.yml
+- include: vagrant.yml

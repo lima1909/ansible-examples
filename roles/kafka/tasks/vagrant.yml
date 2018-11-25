@@ -1,0 +1,10 @@
+---
+
+- name: insert to bashrc
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    insertafter: EOF
+    line: "{{ item }}"
+  with_items:
+      - "alias kafka-topics='/opt/kafka/kafka_2.12-2.0.1/bin/kafka-topics.sh --zookeeper localhost:2181 $@'"
+      - "alias zkCli='/usr/share/zookeeper/bin/zkCli.sh'"
