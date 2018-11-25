@@ -1,3 +1,4 @@
+
 [Unit]
 Description=Apache Kafka Service
 After=network.target
@@ -5,7 +6,7 @@ After=network.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/default/kafka
-ExecStart=/opt/kafka/kafka_2.12-2.0.1/bin/kafka-server-start.sh /opt/kafka/kafka_2.12-2.0.1/config/server.properties
+ExecStart=/opt/kafka/{{ kafka_file }}/bin/kafka-server-start.sh /opt/kafka/{{ kafka_file }}/config/server.properties
 Restart=on-failure
 
 [Install]

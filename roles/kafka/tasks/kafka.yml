@@ -30,16 +30,11 @@
     src: "roles/kafka/files/kafka"
     dest: "/etc/default/kafka"
 
-- name: copy kafka config 
-  copy:
-    src: "roles/kafka/files/kafka.conf"
-    dest: "/etc/init/kafka.conf"
+- name: create kafka config 
+  template: dest=/etc/init/kafka.conf src=kafka.conf.j2 mode=0644 owner=root group=root
 
-
-- name: copy kafka service file 
-  copy:
-    src: "roles/kafka/files/kafka.service"
-    dest: "/lib/systemd/system/kafka.service"
+- name: create kafka service file 
+  template: dest=/lib/systemd/system/kafka.service src=kafka.service.j2 mode=0644 owner=root group=root
 
 - name: create symbolic link to kafka service
   file:
