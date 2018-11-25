@@ -17,7 +17,7 @@
   
 - name: download Kafka
   get_url:
-    url: "http://ftp.halifax.rwth-aachen.de/apache/kafka/2.0.1/kafka_2.12-2.0.1.tgz"
+    url: "http://ftp.halifax.rwth-aachen.de/apache/kafka/2.0.1/{{ kafka_file }}.tgz"
     dest: /var/tmp
 
 - name: create install directory opt/kafka
@@ -32,7 +32,7 @@
 
 - name: extract kafka.tgz into /opt/kafka
   unarchive:
-    src: /var/tmp/kafka_2.12-2.0.1.tgz
+    src: "/var/tmp/{{ kafka_file }}.tgz"
     dest: /opt/kafka
     remote_src: yes
 
@@ -63,13 +63,13 @@
   notify:
     - restart kafka
 
-#- name: "create topic: test"
-#  command: /opt/kafka/kafka_2.12-2.0.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+- name: "create topic: test"
+  command: "/opt/kafka/{{ kafka_file }}/bin/kafka-topics.sh --create --zookeeper localhost:2181 --if-not-exists --replication-factor 1 --partitions 1 --topic test"
 
-#- name: "test topic: test"
-#  command: /opt/kafka/kafka_2.12-2.0.1/bin/kafka-topics.sh --list --zookeeper localhost:2181
-#  register: result
+- name: "test topic: test"
+  command: "/opt/kafka/{{ kafka_file }}/bin/kafka-topics.sh --list --zookeeper localhost:2181"
+  register: result
 
-#- debug: 
-#    msg:
-#      - "Topic-Test-Result: {{ result.stdout }}"
+- debug: 
+    msg:
+      - "Topic-Test-Result: {{ result.stdout }}"

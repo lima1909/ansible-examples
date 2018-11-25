@@ -1,2 +1,5 @@
 ---
-# defaults file for kafka
+
+kafka_version: "2.0.1"
+# kafka file = {{ kafka_file}}.tgz
+kafka_file: "kafka_2.12-{{ kafka_version }}"
