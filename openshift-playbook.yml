@@ -1,0 +1,10 @@
+---
+
+- hosts: local
+  gather_facts: no
+  vars:
+    auth_token: "N1NPPHEUYM6dCiYExMnpA7bcE9-OW-dhM7jOf0gJ0hk"
+    master_url: "https://192.168.99.102:8443"
+  
+  roles:
+  - openshift

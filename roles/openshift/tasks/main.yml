@@ -1,0 +1,42 @@
+---
+# call oc command from shell
+- name: test oc command
+  shell: oc status
+  register: result
+- debug: 
+    msg:
+      - "oc status: {{ result.stdout }}"
+      - "is failed: {{ result is failed }}"
+
+# doc: https://docs.ansible.com/ansible/2.6/modules/k8s_module.html#k8s-module
+- name: "Create a project: foo"
+  k8s:
+    api_key: "{{ auth_token }}"
+    host: "{{ master_url }}" 
+    verify_ssl: no
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Project
+      metadata:
+        name: foo
+        display_name: Foo
+        description: "Test-Project Foo"
+  register: create_project_foo
+- debug: 
+    msg:
+      - "Status: {{ create_project_foo.result.status }}"
+      - "Kind:   {{ create_project_foo.result.kind }}"
+
+
+#######################################
+# Example for use when
+# skip echo, because kind == "Project"
+- name: Echo
+  command: echo "Echo - Kind {{ create_project_foo.result.kind }}"
+  when:
+      - create_project_foo.result.kind != "Project"
+  register: echo
+- debug: 
+    msg: "{{ echo.stdout }}"
+  when: echo.stdout is defined
