@@ -28,15 +28,5 @@
       - "Status: {{ create_project_foo.result.status }}"
       - "Kind:   {{ create_project_foo.result.kind }}"
 
-
-#######################################
-# Example for use when
-# skip echo, because kind == "Project"
-- name: Echo
-  command: echo "Echo - Kind {{ create_project_foo.result.kind }}"
-  when:
-      - create_project_foo.result.kind != "Project"
-  register: echo
-- debug: 
-    msg: "{{ echo.stdout }}"
-  when: echo.stdout is defined
+# example, for using when in a task
+- include: echo-example.yml
