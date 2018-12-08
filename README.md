@@ -6,5 +6,6 @@ examples for ansible
 
 `ansible -m shell -a 'echo Hello Ansible' all`
 
-# run playbook
-`ansible-playbook playbook.yml`
+# run example playbooks
+- simple echo: `ansible-playbook echo-playbook.yml`
+- create kafka in virtual box: `ansible-playbook kafka-playbook.yml`
