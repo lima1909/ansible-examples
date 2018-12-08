@@ -1,0 +1,13 @@
+---
+
+- hosts: local
+  gather_facts: no
+  
+  tasks:
+  - name: "Simple Hello Echo"
+    command: echo "Hello Simple"
+    register: result
+
+  - debug: 
+      msg: "Echo-Result: {{ result.stdout }}"
+ 
