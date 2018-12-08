@@ -7,5 +7,6 @@ examples for ansible
 `ansible -m shell -a 'echo Hello Ansible' all`
 
 # run example playbooks
-- simple echo: `ansible-playbook echo-playbook.yml`
+- simple playbook (without role): `ansible-playbook simple-playbook.yml`
+- echo example: `ansible-playbook echo-playbook.yml`
 - create kafka in virtual box: `ansible-playbook kafka-playbook.yml`
