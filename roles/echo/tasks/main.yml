@@ -8,4 +8,5 @@
     msg:
       - "Echo-Result: {{ result.stdout }}"
       - "In Shell: '{{ lookup('env', 'SHELL') }}"
+      - "I'm on Host: {{ ansible_host }} (through var: {{ var_host }})"
  
