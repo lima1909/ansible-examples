@@ -2,6 +2,9 @@
 
 - name: "Hello Ansible"
   command: echo "Hello Ansible"
+  # important for run with option --check (Check mode "Dry Run")
+  # https://docs.ansible.com/ansible/2.5/user_guide/playbooks_checkmode.html
+  check_mode: no
   register: result
 
 - debug: 
