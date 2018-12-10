@@ -6,10 +6,19 @@
   # https://docs.ansible.com/ansible/2.5/user_guide/playbooks_checkmode.html
   check_mode: no
   register: result
+  tags: "echo"
 
 - debug: 
     msg:
       - "Echo-Result: {{ result.stdout }}"
       - "In Shell: '{{ lookup('env', 'SHELL') }}"
       - "I'm on Host: {{ ansible_host }} (through var: {{ var_host }})"
+
+- name: "Assert Echo-Result"
+  assert:
+    that: 
+      - "'Ansible' in result.stdout" 
+    # do not work on my mac?
+    # success_msg: "Find 'Ansible' in Echo-String"
+    fail_msg: "Expected 'Ansible', but get '{{ result.stdout }}'"
  
