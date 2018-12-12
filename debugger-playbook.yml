@@ -1,0 +1,21 @@
+---
+# https://docs.ansible.com/ansible/2.7/user_guide/playbooks_debugger.html
+- hosts: local
+  gather_facts: no
+  debugger: on_skipped
+  vars:
+    var_foo: FOO
+  
+  tasks:
+
+  - name: "skip this task"
+    command: /usr/bin/true
+    when: False 
+
+# on the break-point you can print with 'p'
+# for example:
+# p host
+# p task (cuurent task: 'skip this task')
+# p task.args
+# p task_vars['var_foo']
+# p result._result
