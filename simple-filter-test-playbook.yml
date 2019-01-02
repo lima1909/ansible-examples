@@ -1,0 +1,40 @@
+---
+
+- hosts: local
+  gather_facts: no
+  vars:
+    url: https://google.de
+    path: "/user/paul/files.txt"
+    sample_list: [3, 4, 2]
+  
+  tasks: 
+
+  - name: Find current path (pwd)
+    shell: pwd
+    register: pwd_output
+
+# doc for filter: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
+  - name: Read this file
+    shell: "cat {{ pwd_output.stdout }}/simple-filter-test-playbook.yml"
+    register: cat_output
+
+  - name: Filter - Convert to YAML
+    set_fact:
+      yaml_var: "{{ cat_output.stdout | from_yaml }}"
+
+  - name: "Filter - Max from List: {{ sample_list }}"
+    debug:
+      msg: 'Max:  {{ vars["sample_list"] | max }}'
+
+# doc for tests: https://docs.ansible.com/ansible/latest/user_guide/playbooks_tests.html
+  - name: Test - search
+    debug:
+      msg: "search test"
+    when: path is search("/us.*/pa.*/.*.txt")
+
+  - assert:
+      that:
+        - url is match ('^(https?:\/\/)\S+[^/]$')
+        - pwd_output.stdout is directory
+        - 4 in sample_list
+
